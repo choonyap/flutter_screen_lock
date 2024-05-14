@@ -70,8 +70,7 @@ class ScreenLock extends StatefulWidget {
     this.useLandscape = true,
   })  : correctString = null,
         title = title ?? const Text('Please enter new passcode.'),
-        confirmTitle =
-            confirmTitle ?? const Text('Please confirm new passcode.'),
+        confirmTitle = confirmTitle ?? const Text('Please confirm new passcode.'),
         onUnlocked = null,
         secretsConfig = secretsConfig ?? const SecretsConfig(),
         assert(maxRetries > -1);
@@ -168,14 +167,12 @@ class ScreenLock extends StatefulWidget {
 }
 
 class _ScreenLockState extends State<ScreenLock> {
-  late InputController inputController =
-      widget.inputController ?? InputController();
+  late InputController inputController = widget.inputController ?? InputController();
 
   /// Logging retries.
   int retries = 1;
 
-  final StreamController<Duration> inputDelayController =
-      StreamController.broadcast();
+  final StreamController<Duration> inputDelayController = StreamController.broadcast();
 
   bool inputDelayed = false;
   bool enabled = true;
@@ -209,8 +206,7 @@ class _ScreenLockState extends State<ScreenLock> {
       }
     });
 
-    WidgetsBinding.instance
-        .addPostFrameCallback((_) => widget.onOpened?.call());
+    WidgetsBinding.instance.addPostFrameCallback((_) => widget.onOpened?.call());
   }
 
   @override
@@ -289,8 +285,7 @@ class _ScreenLockState extends State<ScreenLock> {
       if (widget.correctString == null) {
         return StreamBuilder<bool>(
           stream: inputController.confirmed,
-          builder: (context, snapshot) =>
-              snapshot.data == true ? widget.confirmTitle! : child,
+          builder: (context, snapshot) => snapshot.data == true ? widget.confirmTitle! : child,
         );
       }
       return child;
@@ -313,7 +308,7 @@ class _ScreenLockState extends State<ScreenLock> {
 
     return Builder(
       builder: (context) => DefaultTextStyle(
-        style: Theme.of(context).textTheme.headline6!,
+        style: Theme.of(context).textTheme.titleLarge!,
         textAlign: TextAlign.center,
         child: buildDelay(
           buildConfirmed(
@@ -328,8 +323,7 @@ class _ScreenLockState extends State<ScreenLock> {
   Widget build(BuildContext context) {
     final orientations = <Orientation, Axis>{
       Orientation.portrait: Axis.vertical,
-      Orientation.landscape:
-          widget.useLandscape ? Axis.horizontal : Axis.vertical,
+      Orientation.landscape: widget.useLandscape ? Axis.horizontal : Axis.vertical,
     };
 
     Widget buildSecrets() {
@@ -413,8 +407,7 @@ class _ScreenLockState extends State<ScreenLock> {
   }
 }
 
-typedef DelayBuilderCallback = Widget Function(
-    BuildContext context, Duration delay);
+typedef DelayBuilderCallback = Widget Function(BuildContext context, Duration delay);
 
 typedef SecretsBuilderCallback = Widget Function(
   BuildContext context,
